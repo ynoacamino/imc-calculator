@@ -13,7 +13,7 @@ export default function Home() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({talla, peso, response: peso/(talla*talla)})
+      body: JSON.stringify({talla: Number(talla), peso: Number(peso), response: peso/(talla*talla)})
     }).then((r) => r.json())
     .then((r) => console.log(r))
     .catch((r) => console.error(r))
