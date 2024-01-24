@@ -5,6 +5,7 @@ import { useState } from "react";
 export default function Home() {
   const [talla, setTalla] = useState("");
   const [peso, setPeso] = useState("");
+  const [text, setText] = useState("");
 
   const handdleSubmit = (e) => {
     e.preventDefault();
@@ -17,6 +18,14 @@ export default function Home() {
     }).then((r) => r.json())
     .then((r) => console.log(r))
     .catch((r) => console.error(r))
+    .finally(() => {
+      setPeso("");
+      setTalla("");
+      setText("Gracias");
+      setTimeout(() => {
+        setText("");
+      }, 3000)
+    });
   };
   
   return (
@@ -45,6 +54,9 @@ export default function Home() {
         <button type="submit" className="px-4 py-2 rounded-md bg-purple-600 text-white font-bold">
           Calcular
         </button>
+        <h1 className="uppercase text-5xl font-extrabold text-center">
+          {text}
+        </h1>
       </form>
     </main>
   );
