@@ -29,12 +29,12 @@ export default function Home() {
   };
   
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 text-xl">
+    <main className="flex min-h-screen flex-col items-center justify-between p-10 text-xl">
       <form
         onSubmit={handdleSubmit}
         className="w-full max-w-md flex flex-col gap-10 bg-slate-50 p-10 rounded-xl shadow-lg"
       >
-        <h1 className="uppercase text-5xl font-extrabold text-center">
+        <h1 className="uppercase sm:text-5xl text-3xl font-extrabold text-center">
           Calculadora de ICM
         </h1>
         <label className="flex gap-4 justify-center items-center">
