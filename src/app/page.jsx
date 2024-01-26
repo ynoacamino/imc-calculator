@@ -16,7 +16,7 @@ export default function Home() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({talla: Number(talla), peso: Number(peso), response: r})
+      body: JSON.stringify({talla: Number(talla), peso: Number(peso), response: Number(r)})
     }).then((r) => r.json())
     .then((r) => console.log(r))
     .catch((r) => console.error(r))
