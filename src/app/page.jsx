@@ -6,6 +6,7 @@ export default function Home() {
   const [talla, setTalla] = useState("");
   const [peso, setPeso] = useState("");
   const [text, setText] = useState("");
+  const [imc, setImc] = useState("");
 
   const handdleSubmit = (e) => {
     e.preventDefault();
@@ -22,6 +23,7 @@ export default function Home() {
       setPeso("");
       setTalla("");
       setText("Gracias");
+      setImc("" + peso/(talla*talla))
       setTimeout(() => {
         setText("");
       }, 3000)
@@ -32,7 +34,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-10 text-xl">
       <form
         onSubmit={handdleSubmit}
-        className="w-full max-w-md flex flex-col gap-10 bg-slate-50 p-10 rounded-xl shadow-lg"
+        className="w-full max-w-md flex flex-col gap-10 dark:bg-gray-900  bg-slate-50 p-10 rounded-xl shadow-lg"
       >
         <h1 className="uppercase sm:text-5xl text-3xl font-extrabold text-center">
           Calculadora de ICM
@@ -41,22 +43,35 @@ export default function Home() {
           <span className="">
             Peso:
           </span>
-          <input onChange={(e) => setPeso(e.target.value)} value={peso} type="number" className="text-center border-solid border-[1px] border-gray-400 p-2 rounded-md w-full max-w-20" />
+          <input
+          onChange={(e) => setPeso(e.target.value)}
+          value={peso} type="number"
+          className="text-center border-solid border-[1px] border-gray-400 p-2 rounded-md w-full max-w-20 dark:text-black" />
           <span className="ml-[-12px]">kg</span>
         </label>
         <label className="flex gap-4 justify-center items-center">
           <span className="">
             Talla:
           </span>
-          <input onChange={(e) => setTalla(e.target.value)} value={talla} type="number" className="text-center border-solid border-[1px] border-gray-400 p-2 rounded-md w-full max-w-20" />
+          <input
+            onChange={(e) => setTalla(e.target.value)}
+            value={talla}
+            type="number"
+            className="text-center border-solid border-[1px] border-gray-400 p-2 rounded-md w-full max-w-20 dark:text-black" />
           <span className="ml-[-12px]">cm</span>
         </label>
         <button type="submit" className="px-4 py-2 rounded-md bg-purple-600 text-white font-bold">
           Calcular
         </button>
-        <h1 className="uppercase text-5xl font-extrabold text-center">
+        <h2 className="uppercase text-2xl font-extrabold text-center">
+          Aqui saldra tu IMC:
+        </h2>
+        <h2 className="uppercase text-2xl font-extrabold text-center text-red-950">
+          {imc}
+        </h2>
+        <h2 className="uppercase text-5xl font-extrabold text-center">
           {text}
-        </h1>
+        </h2>
       </form>
     </main>
   );
