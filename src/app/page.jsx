@@ -5,7 +5,6 @@ import { useState } from "react";
 export default function Home() {
   const [talla, setTalla] = useState("");
   const [peso, setPeso] = useState("");
-  const [text, setText] = useState("");
   const [imc, setImc] = useState("");
 
   const handdleSubmit = (e) => {
@@ -14,10 +13,6 @@ export default function Home() {
     setImc("" + r);
     setPeso("");
     setTalla("");
-    setText("Gracias");
-    setTimeout(() => {
-      setText("");
-    }, 3000)
     fetch(`${process.env.NEXT_PUBLIC_API}/add`, {
       method: "post",
       headers: {
@@ -65,13 +60,45 @@ export default function Home() {
         <h2 className="uppercase text-2xl font-extrabold text-center">
           Aqui saldra tu IMC:
         </h2>
-        <h2 className="uppercase text-2xl font-extrabold text-center text-red-950">
-          {imc}
-        </h2>
-        <h2 className="uppercase text-5xl font-extrabold text-center">
-          {text}
-        </h2>
+        <Result imc={Number(imc)}/>
       </form>
     </main>
   );
+}
+
+function Result({imc}) {
+  if(imc === 0 ) return null;
+  if(imc < 18.5) {
+    return (
+      <>
+      <h2 className="uppercase text-2xl font-extrabold text-center text-red-950 dark:text-red-400">
+        Tu IMC es menor que 18.5 lo cual se considera de bajo peso
+      </h2>
+      <h2 className="uppercase text-2xl font-extrabold text-center text-red-950 dark:text-red-400">
+        {imc}
+      </h2>
+      </>
+    )
+  } else if (imc < 24.9) {
+    return (
+      <>
+        <h2 className="uppercase text-2xl font-extrabold text-center text-red-950 dark:text-red-400">
+          Tu IMC esta entre 18.5 y 24.9, tu peso es saludable
+        </h2>
+        <h2 className="uppercase text-2xl font-extrabold text-center text-green-700 dark:text-green-400">
+          {imc}
+        </h2>
+      </>
+    )
+  }
+  return (
+    <>
+      <h2 className="uppercase text-2xl font-extrabold text-center text-red-950 dark:text-red-400">
+        Tu IMC es superior a 24.9, el cual se considera sobrepeso
+      </h2>
+      <h2 className="uppercase text-2xl font-extrabold text-center text-red-950 dark:text-red-400">
+        {imc}
+      </h2>
+    </>
+  )
 }
