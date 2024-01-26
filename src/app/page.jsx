@@ -11,6 +11,13 @@ export default function Home() {
   const handdleSubmit = (e) => {
     const r = (Number(peso)/(Number(talla/100)*Number(talla/100))).toFixed(2);
     e.preventDefault();
+    setImc("" + r);
+    setPeso("");
+    setTalla("");
+    setText("Gracias");
+    setTimeout(() => {
+      setText("");
+    }, 3000)
     fetch(`${process.env.NEXT_PUBLIC_API}/add`, {
       method: "post",
       headers: {
@@ -20,15 +27,6 @@ export default function Home() {
     }).then((r) => r.json())
     .then((r) => console.log(r))
     .catch((r) => console.error(r))
-    .finally(() => {
-      setImc("" + r)
-      setPeso("");
-      setTalla("");
-      setText("Gracias");
-      setTimeout(() => {
-        setText("");
-      }, 3000)
-    });
   };
   
   return (
