@@ -15,15 +15,15 @@ export default function Home() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({talla: Number(talla), peso: Number(peso), response: peso/(talla*talla)})
+      body: JSON.stringify({talla: Number(talla), peso: Number(peso), response: Number(peso)/(Number(talla)*Number(talla))})
     }).then((r) => r.json())
     .then((r) => console.log(r))
     .catch((r) => console.error(r))
     .finally(() => {
+      setImc("" + Number(peso)/(Number(talla)*Number(talla)))
       setPeso("");
       setTalla("");
       setText("Gracias");
-      setImc("" + peso/(talla*talla))
       setTimeout(() => {
         setText("");
       }, 3000)
