@@ -9,18 +9,19 @@ export default function Home() {
   const [imc, setImc] = useState("");
 
   const handdleSubmit = (e) => {
+    const r = (Number(peso)/(Number(talla/100)*Number(talla/100))).toFixed(2);
     e.preventDefault();
     fetch(`${process.env.NEXT_PUBLIC_API}/add`, {
       method: "post",
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({talla: Number(talla), peso: Number(peso), response: Number(peso)/(Number(talla)*Number(talla))})
+      body: JSON.stringify({talla: Number(talla), peso: Number(peso), response: r})
     }).then((r) => r.json())
     .then((r) => console.log(r))
     .catch((r) => console.error(r))
     .finally(() => {
-      setImc("" + Number(peso)/(Number(talla)*Number(talla)))
+      setImc("" + r)
       setPeso("");
       setTalla("");
       setText("Gracias");
